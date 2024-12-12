@@ -44,6 +44,16 @@
             margin-top: 20px;
             color: #333;
         }
+
+        #esc {
+            style="display: inline-block; 
+            padding: 10px 20px; 
+            background-color: #555; 
+            color: white; 
+            border-radius: 25px; 
+            font-weight: bold; 
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -101,6 +111,7 @@
                         container.style.fontSize = "24px";
                         container.innerHTML = `
                         <p>The End! You may now close this tab.</>
+                        <p id="esc">Esc</>
                         <p><small><em>"The Tale of Peter Rabbit"</em> by Beatrix Potter, available on <a href="https://freekidsbooks.org" target="_blank" style="color: blue;">FreeKidsBooks.org</a>.</small></p>
                         `;
                         return;    
