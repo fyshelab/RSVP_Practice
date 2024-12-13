@@ -82,14 +82,13 @@
 </head>
 <body>
     <div id="instruction-container" style="text-align: center; font-size: 24px; margin-top: 50px;">
-        <p>Click start when you are ready.</p>
+        <p>Click start when you are ready.......</p>
         <button id="startButton" style="font-size: 18px; padding: 15px 30px; background-color: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">
             Start
         </button>
     </div>
 
     <div id="continue-container" style="display: none; text-align: center; font-size: 24px; margin-top: 50px;">
-        <p id="esc">Esc</p>
         <p>If you would like to keep practicing, please press continue. Otherwise, you may close this tab.</p>
         <button id="continueButton" style="font-size: 18px; padding: 15px 30px; background-color: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">
             Continue
@@ -107,6 +106,7 @@
         const displayInterval = 500;  // Display each word for 500ms
         let index = 0;  // Word index
         let isPaused = false;  // To track pause state
+        let questionAsked = false;
         let container = document.getElementById('word_display');  // Display container
         let startTime;  // To calculate elapsed time
         let pauseTime;  // Time when pause starts
@@ -123,6 +123,7 @@
             isPaused = false;
             startTime += performance.now() - pauseTime; // Adjust startTime to account for pause
             document.getElementById('continue-container').style.display = 'none'; // Hide continue button
+            document.getElementById('word_display').style.display = 'block';
             requestAnimationFrame(loop); // Resume the loop
         }
     
@@ -130,6 +131,7 @@
             isPaused = true;
             pauseTime = performance.now();
             document.getElementById('continue-container').style.display = 'flex'; // Show continue button
+            document.getElementById('word_display').style.display = 'none';
         }
 
         function loop(timestamp) {
@@ -142,8 +144,9 @@
                 index++;
 
                 // Pause after the specified number of words
-                if (index % pauseAfterWords === 0 && index < words.length) {
+                if (index % pauseAfterWords === 0 && questionAsked == false && index < words.length) {
                     pauseAndAsk();
+                    questionAsked = true;
                     return;
                 }
 
